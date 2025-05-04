@@ -1,3 +1,4 @@
+import shutil
 import sys
 
 
@@ -16,6 +17,8 @@ def main():
         elif command_name == "type":
             if command_argument in ["exit", "echo", "type"]:
                 print(f"{command_argument} is a shell builtin")
+            elif path := shutil.which(command_argument):
+                print(f"{command_argument} is {path}")
             else:
                 print(f"{command_argument}: not found")
         else:
