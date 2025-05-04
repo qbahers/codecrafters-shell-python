@@ -1,4 +1,5 @@
 import shutil
+import subprocess
 import sys
 
 
@@ -21,6 +22,8 @@ def main():
                 print(f"{command_argument} is {path}")
             else:
                 print(f"{command_argument}: not found")
+        elif shutil.which(command_name):
+            subprocess.run(command.split())
         else:
             print(f"{command}: command not found")
 
