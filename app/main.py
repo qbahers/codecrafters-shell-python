@@ -13,6 +13,11 @@ def main():
             break
         elif command_name == "echo":
             print(command_argument)
+        elif command_name == "type":
+            if command_argument in ["exit", "echo", "type"]:
+                print(f"{command_argument} is a shell builtin")
+            else:
+                print(f"{command_argument}: not found")
         else:
             print(f"{command}: command not found")
 
