@@ -26,7 +26,9 @@ def main():
         elif command_name == "pwd":
             print(os.getcwd())
         elif command_name == "cd":
-            if os.path.isdir(command_argument):
+            if command_argument == "~":
+                os.chdir(os.environ['HOME'])
+            elif os.path.isdir(command_argument):
                 os.chdir(command_argument)
             else:
                 print(f"cd: {command_argument}: No such file or directory")
