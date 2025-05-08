@@ -17,7 +17,7 @@ def main():
         elif command_name == "echo":
             print(command_argument)
         elif command_name == "type":
-            if command_argument in ["exit", "echo", "type", "pwd"]:
+            if command_argument in ["exit", "echo", "type", "pwd", "cd"]:
                 print(f"{command_argument} is a shell builtin")
             elif path := shutil.which(command_argument):
                 print(f"{command_argument} is {path}")
@@ -25,6 +25,11 @@ def main():
                 print(f"{command_argument}: not found")
         elif command_name == "pwd":
             print(os.getcwd())
+        elif command_name == "cd":
+            if os.path.isdir(command_argument):
+                os.chdir(command_argument)
+            else:
+                print(f"cd: {command_argument}: No such file or directory")
         elif shutil.which(command_name):
             subprocess.run(command.split())
         else:
