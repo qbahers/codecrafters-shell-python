@@ -12,7 +12,13 @@ def main():
         command = input()
         command_split = command.split(" ", 1)
         command_name, command_argument = (command_split[0], command_split[1]) if len(command_split) > 1 else (command, None)
-        if command == "exit 0":
+        if " 1> " in command or " > " in command:
+            command = command.replace(" 1> ", " > ")
+            left, right = command.split(" > ")
+            completed_process = subprocess.run(left.split(), capture_output=True, text=True)
+            with open(right, "w") as f:
+                f.write(completed_process.stdout)
+        elif command == "exit 0":
             break
         elif command_name == "echo":
             print(command_argument)
